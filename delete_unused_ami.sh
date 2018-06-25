@@ -31,19 +31,20 @@ for i in "${AMI_all[@]}"; do
  done
 
 echo "UNUSED AMI"
+echo "Deregister the AMI and snapshot using the below commands"
 # Loop to deregister unused AMI
 for i in "${AMI_unused[@]}"
 do
     #unused snapshot
     snapshot_unused=($($aws ec2 describe-images --region "$REGION" --output text --image-ids $i --query 'Images[*].BlockDeviceMappings[*].Ebs.SnapshotId'))
 
-    echo "Deregistering AMI for AMI id $i ......."
+    echo "aws ec2 deregister-image --image-id $i --region $REGION"
     # Deregister AMI
     #$aws ec2 deregister-image --image-id $i --region "$REGION"
 
     for j in "${snapshot_unused[@]}"
     do
-        echo "Deleting snapshots for AMI id $i with snapshot id : $j ......."
+        echo "aws ec2 delete-snapshot --snapshot-id $j --region $REGION"
         # Delete Snapshot
            #$aws ec2 delete-snapshot --snapshot-id $j --region "$REGION"
     done
