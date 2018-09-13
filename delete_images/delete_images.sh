@@ -1,7 +1,7 @@
 #!/bin/bash
 #
 #Shell script to delete images from GCP whose number of images for a specific prefix is greater than 51
-#./scriptname region date
+#./scriptname
 #./delete_images.sh
 #
 
@@ -16,14 +16,14 @@ do
   echo "Count of Images for $prefix : $IMAGES_COUNT"
 
   # Check if the images count is not zero and greater than 51
-  if [ "$IMAGES_COUNT" -ne 0 ] && [ "$IMAGES_COUNT" -gt 1 ];
+  if [ "$IMAGES_COUNT" -ne 0 ] && [ "$IMAGES_COUNT" -gt 51 ];
     then
-    if [ "$IMAGES_COUNT" -gt 1 ];
+    if [ "$IMAGES_COUNT" -gt 51 ];
       then
       count="$(bc -l <<< "$IMAGES_COUNT"-51)"
     fi
 
-    # get a list of existing images for a specific prefix
+    # Get a list of existing images for a specific prefix sorted by creation time
     IMAGES_LIST="$(gcloud compute images list --filter="name~'.*${prefix}*.'" --sort-by=~creationTimestamp --uri | tail -n $count)"
 
     # loop through the images
