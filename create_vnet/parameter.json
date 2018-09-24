@@ -1,0 +1,30 @@
+{
+"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vnetName": {
+      "value": "celerantVnet"
+    },
+    "vnetAddressPrefix": {
+      "value": "10.3.0.0/24"
+    },
+    "subnet1Name": {
+      "value": "FrontEnd"
+    },
+    "subnet1Prefix": {
+      "value": "10.3.0.0/27"
+    },
+    "subnet2Name": {
+      "value": "BackEnd"
+    },
+    "subnet2Prefix": {
+      "value": "10.3.0.32/27"
+    },
+    "frontEndNSGName": { 
+     "value": "NSG-FrontEnd" 
+    },
+    "backEndNSGName": { 
+    "value": "NSG-BackEnd" 
+    } 
+  }
+}
